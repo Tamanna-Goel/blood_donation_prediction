@@ -2,7 +2,7 @@
 
 🔧 Tools: Python, Scikit-learn, Matplotlib
 
-🧠 Models: Random Forest, Gradient Boosting Classifier
+🧠 Models: Gradient Boosting Classifier
 
 🎯 Accuracy: 77%
 
