@@ -1,0 +1,6 @@
+pip install flask
+pip install scikit-learn
+pip install pandas
+pip install numpy
+cd 
+python Prediction.py

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blood Donation Prediction</title>
+    <style>
+      body {
+        background-color: #F7CAC9;
+        font-family: Arial, sans-serif;
+        font-size: 18px;
+        color: #5A5A5A;
+      }
+
+      h1 {
+        font-size: 48px;
+        font-weight: bold;
+        color: #B80C09;
+        text-align: center;
+        margin-top: 100px;
+      }
+
+      form {
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      label {
+        display: block;
+        margin-top: 20px;
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      input[type="number"] {
+        font-size: 18px;
+        padding: 10px;
+        border: 2px solid #B80C09;
+        border-radius: 5px;
+      }
+
+      input[type="submit"] {
+        font-size: 24px;
+        padding: 10px 30px;
+        background-color: #B80C09;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        margin-top: 50px;
+        cursor: pointer;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #5A5A5A;
+      }
+
+      .bottom-button {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .output {
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 50px;
+      }
+
+      .error {
+        font-size: 24px;
+        color: red;
+        margin-top: 50px;
+      }
+
+      .clear-button {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+    </style>
+    <script>
+      function validateForm() {
+        var lastDonation = parseInt(document.getElementById("months_since_last_donation").value);
+        var firstDonation = parseInt(document.getElementById("months_since_first_donation").value);
+        if (lastDonation > firstDonation) {
+          alert("Oops! Looks like you entered an invalid value. 'Months since last donation' should be less than or equal to 'Months since first donation'.");
+          return false;
+        }
+        return true;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Blood Donation Prediction</h1>
+    <form action="/predict" method="post" onsubmit="return validateForm()">
+      <label for="unnamed_0">Unnamed_0:</label>
+      <input type="number" name="unnamed_0" id="unnamed_0" step="1" required>
+
+      <label for="months_since_last_donation">Months since last donation:</label>
+      <input type="number" name="months_since_last_donation" id="months_since_last_donation" step="1" required>
+
+      <label for="number_of_donations">Number of donations:</label>
+      <input type="number" name="number_of_donations" id="number_of_donations" step="1" required>
+
+      <label for="total_volume_donated">Total volume donated:</label>
+      <input type="number" name="total_volume_donated" id="total_volume_donated" step="1" required>
+
+      <label for="months_since_first_donation">Months since first donation:</label>
+      <input type="number" name="months_since_first_donation" id="months_since_first_donation" step="1" required>
+
+      <label for="recency_of_donations">Recency of donations:</label>
+      <input type="number" name="recency_of_donations" id="recency_of_donations" step="0.1" required>
+
+      <label for="donation_frequency">Donation frequency:</label>
+      <input type="number" name="donation_frequency" id="donation_frequency" step="0.1" required>
+
+      <label for="donation_history_interaction">Donation history interaction:</label>
+      <input type="number" name="donation_history_interaction" id="donation_history_interaction" step="1" required>
+
+      <label for="donation_consistency">Donation consistency:</label>
+      <input type="number" name="donation_consistency" id="donation_consistency" step="0.1" required>
+
+      <label for="relative_recency">Relative recency:</label>
+      <input type="number" name="relative_recency" id="relative_recency" step="1" required>
+
+      <label for="log_total_volume_donated">Log total volume donated:</label>
+      <input type="number" name="log_total_volume_donated" id="log_total_volume_donated" step="0.1" required>
+
+      <div class="bottom-button">
+        <input type="submit" value="Predict">
+      </div>
+    </form>
+
+    {% if prediction is not none %}
+      <div class="output">
+        <p style="font-size: 45px; font-weight: bold; text-align: center;">
+          {% if prediction >= 0.44 %}
+            The donor is <span style="color: green">likely</span> to donate blood in March 2007.
+          {% else %}
+            The donor is <span style="color: red">unlikely</span> to donate blood in March 2007.
+          {% endif %}
+        </p>
+      </div>
+    {% endif %}
+
+
+
+    {% if error is not none %}
+    <div class="output">{{ error }}</div>
+    {% endif %}
+
+    <div class="clear-button">
+      <button type="button" onclick="clearOutput()">Clear</button>
+    </div>
+
+    <script>
+      function clearOutput() {
+      var output = document.querySelector(".output");
+      if (output !== null) {
+        output,innerGHTML = "";
+      }
+    }
+    </script>
+
+
+
+      </body>
+    </html>
