@@ -1,10 +1,10 @@
 💉 Blood Donation Prediction
 
-🔧 Tools: Python, Scikit-learn, Matplotlib
+    - Tools: Python, Scikit-learn, Matplotlib
 
-🧠 Models: Gradient Boosting Classifier
+    - Models: Gradient Boosting Classifier
 
-🎯 Accuracy: 77%
+    - Accuracy: 77%
 
 Challenges and Risks
 - Data Quality Issues
